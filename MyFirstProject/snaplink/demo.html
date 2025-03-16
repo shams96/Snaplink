@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapLink Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            color: #7C4DFF;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .demo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+        .phone-mockup {
+            width: 320px;
+            height: 650px;
+            background-color: #fff;
+            border-radius: 36px;
+            border: 12px solid #333;
+            overflow: hidden;
+            box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .app-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #7C4DFF;
+        }
+        .camera-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+        .app-content {
+            padding: 16px;
+            height: calc(100% - 73px);
+            overflow-y: auto;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .widget-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        .widget-item {
+            width: calc(50% - 4px);
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .widget-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        .widget-info {
+            padding: 8px;
+            background-color: white;
+        }
+        .widget-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .widget-time {
+            font-size: 12px;
+            color: #888;
+        }
+        .challenge-card {
+            background-color: #F3F0FF;
+            border-radius: 12px;
+            padding: 16px;
+            border-left: 4px solid #7C4DFF;
+            margin-bottom: 24px;
+        }
+        .challenge-text {
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+        .challenge-button {
+            background-color: #7C4DFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .snap-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .snap-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .snap-content {
+            padding: 12px;
+        }
+        .snap-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .snap-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin-right: 12px;
+        }
+        .snap-user-info {
+            flex: 1;
+        }
+        .snap-username {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .snap-timestamp {
+            font-size: 12px;
+            color: #888;
+        }
+        .snap-caption {
+            margin-bottom: 12px;
+        }
+        .snap-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .expiration-tag {
+            background-color: rgba(255, 107, 107, 0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+            color: #FF6B6B;
+            font-size: 12px;
+        }
+        .reaction-count {
+            font-size: 14px;
+            color: #666;
+        }
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: white;
+            display: flex;
+            border-top: 1px solid #eee;
+        }
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .tab-label {
+            font-size: 12px;
+        }
+        .active-tab {
+            color: #7C4DFF;
+            font-weight: bold;
+        }
+        .inactive-tab {
+            color: #888;
+        }
+        .features {
+            max-width: 500px;
+        }
+        .feature-item {
+            display: flex;
+            margin-bottom: 24px;
+        }
+        .feature-icon {
+            font-size: 32px;
+            margin-right: 16px;
+            min-width: 40px;
+            text-align: center;
+        }
+        .feature-content h3 {
+            margin: 0 0 8px 0;
+            color: #333;
+        }
+        .feature-content p {
+            margin: 0;
+            color: #666;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SnapLink</h1>
+            <p>Capture authentic moments, share with friends, without the pressure</p>
+        </div>
+        
+        <div class="demo-container">
+            <!-- Phone Mockup -->
+            <div class="phone-mockup">
+                <!-- App Header -->
+                <div class="app-header">
+                    <div class="app-logo">SnapLink</div>
+                    <div class="camera-icon">📷</div>
+                </div>
+                
+                <!-- App Content -->
+                <div class="app-content">
+                    <!-- Live Widgets Section -->
+                    <div>
+                        <div class="section-header">
+                            <div class="section-title">Live Widgets</div>
+                            <div>⚙️</div>
+                        </div>
+                        
+                        <div class="widget-grid">
+                            <!-- Widget 1 -->
+                            <div class="widget-item">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300" 
+                                    alt="Coffee"
+                                    class="widget-image"
+                                />
+                                <div class="widget-info">
+                                    <div class="widget-name">Alex</div>
+                                    <div class="widget-time">15m ago</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Widget 2 -->
+                            <div class="widget-item">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1552083375-1447ce886485?w=400&h=300" 
+                                    alt="Sunset"
+                                    class="widget-image"
+                                />
+                                <div class="widget-info">
+                                    <div class="widget-name">Sarah</div>
+                                    <div class="widget-time">1h ago</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Daily Challenge -->
+                        <div class="challenge-card">
+                            <div class="challenge-text">
+                                What's your workspace looking like today?
+                            </div>
+                            <button class="challenge-button">
+                                Respond Now
+                            </button>
+                        </div>
+                        
+                        <!-- Recent Snaps -->
+                        <div class="section-header">
+                            <div class="section-title">Recent Snaps</div>
+                        </div>
+                        
+                        <!-- Snap Card -->
+                        <div class="snap-card">
+                            <img 
+                                src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=500&h=300" 
+                                alt="Nature"
+                                class="snap-image"
+                            />
+                            <div class="snap-content">
+                                <div class="snap-header">
+                                    <img 
+                                        src="https://api.dicebear.com/6.x/personas/svg?seed=Sarah" 
+                                        alt="Sarah"
+                                        class="snap-avatar"
+                                    />
+                                    <div class="snap-user-info">
+                                        <div class="snap-username">Sarah Kim</div>
+                                        <div class="snap-timestamp">30m ago</div>
+                                    </div>
+                                </div>
+                                <div class="snap-caption">
+                                    Beautiful sunset at the beach today! 🌅
+                                </div>
+                                <div class="snap-footer">
+                                    <div class="expiration-tag">
+                                        Disappears soon
+                                    </div>
+                                    <div class="reaction-count">2 👍</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Bar -->
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon active-tab">🏠</div>
+                        <div class="tab-label active-tab">Home</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon inactive-tab">👥</div>
+                        <div class="tab-label inactive-tab">Friends</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon inactive-tab">👤</div>
+                        <div class="tab-label inactive-tab">Profile</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Features -->
+            <div class="features">
+                <h2>Key Features</h2>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">⏱️</div>
+                    <div class="feature-content">
+                        <h3>Smart Timing, Not Random Pressure</h3>
+                        <p>
+                            Set preferred time windows when you're typically available, with AI suggesting 
+                            optimal times based on friends' patterns.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-content">
+                        <h3>Live Widget Sharing</h3>
+                        <p>
+                            Send instant snapshots to a small group of best friends, appearing live 
+                            on their home screen widget.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-content">
+                        <h3>Flexible Sharing & Privacy Controls</h3>
+                        <p>
+                            Post to specific friend groups with auto-private mode where posts disappear 
+                            after a few hours unless saved.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-content">
+                        <h3>AI-Enhanced Features</h3>
+                        <p>
+                            AI auto-snap suggestion mode, "SnapSurprise" collage feature for weekly recap,
+                            and context-aware content suggestions based on user activity.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

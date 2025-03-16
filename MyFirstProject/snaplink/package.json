@@ -1,0 +1,26 @@
+{
+  "name": "snaplink",
+  "version": "1.0.0",
+  "description": "A social media app for authentic moments",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx serve public",
+    "android": "cap run android",
+    "ios": "cap run ios",
+    "sync": "cap sync",
+    "build": "cap copy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@capacitor/android": "^5.5.0",
+    "@capacitor/camera": "^5.0.0",
+    "@capacitor/core": "^5.5.0",
+    "@capacitor/ios": "^5.5.0",
+    "@capacitor/push-notifications": "^5.0.0",
+    "@capacitor/splash-screen": "^5.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^5.5.0",
+    "serve": "^14.2.1"
+  }
+}

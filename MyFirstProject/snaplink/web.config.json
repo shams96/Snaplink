@@ -1,0 +1,19 @@
+{
+  "server": {
+    "url": "http://localhost:8100",
+    "cleartext": true
+  },
+  "pwa": {
+    "enabled": true,
+    "autoUpdate": true,
+    "backgroundColor": "#FFFFFF",
+    "themeColor": "#7C4DFF",
+    "display": "standalone",
+    "scope": "/",
+    "startUrl": "/",
+    "appName": "SnapLink",
+    "appShortName": "SnapLink",
+    "description": "Capture authentic moments, share with friends, without the pressure",
+    "screenshots": []
+  }
+}
